@@ -11,7 +11,7 @@ This application was created and tested in Django 1.5 with MySql.
 Create a database named `mailmaster` in MySQL.
 
 Configure according to this link if you want to use some other database engine:
-[a link](https://docs.djangoproject.com/en/dev/intro/tutorial01/#database-setup)
+[django docs](https://docs.djangoproject.com/en/dev/intro/tutorial01/#database-setup)
 
 Open the settings.py in the application and edit the following fields.
     
@@ -32,4 +32,4 @@ Type the following commands:
     python manage.py runserver
     
 Visit
-[a link](http://127.0.0.1:800/)
+[localhost](http://127.0.0.1:8000/)
