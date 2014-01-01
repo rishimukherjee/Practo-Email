@@ -1,3 +1,5 @@
+extensions_not_allowed = ["exe", "msi"]
+
 function toggle(source) {
   // Used for selecting/de-selecting email recipients.
   var checkboxes = document.getElementsByName('patientcheck');
@@ -22,6 +24,14 @@ function error_html(error){
     return errorhtml;
 }
 
+function inArray(array, value) {
+    // Utility function to check presence of element in array
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] == value) return true;
+    }
+    return false;
+}
+
 function validate() {
     // Validation function. It is called before
     // Submiting the form.
@@ -42,7 +52,7 @@ function validate() {
     // Check if exe file is being sent in mail.
     var file_name = $("#attachment").val();
     var extension = file_name.substr((file_name.lastIndexOf('.') + 1));
-    if(extension == 'exe' || extension == 'msi'){
+    if(inArray(extensions_not_allowed, extension)){
         $('#error').html("");       
         $('#error').html(error_html("Executable file not allowed."));
         return false;

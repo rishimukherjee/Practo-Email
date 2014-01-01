@@ -70,8 +70,7 @@ def mail(request):
         subject = request.POST['subject']
         message = request.POST['message']
         email = request.POST['email']
-        #patient_email = request.POST.getlist('patientcheck')
-        patient_email = ['thethunder666@gmail.com', 'gadhaboka@gmail.com', 'nomoshkar2@gmail.com']
+        patient_email = request.POST.getlist('patientcheck')
         
         # Object for sending email meassages.
         email_object = EmailMessage(
