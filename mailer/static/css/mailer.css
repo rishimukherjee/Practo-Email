@@ -1,0 +1,12 @@
+.table-nonfluid {
+   width: auto;
+}
+
+div.padded{
+    padding-left: 5em;
+    padding-right: 5em;
+}
+
+.col-md-5{
+    border: 2px;
+}

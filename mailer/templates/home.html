@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load app_filter %}
+{% block content %}
+      <div class="jumbotron">
+        <h1>Welcome to Practo Mail</h1>
+        <a href="/email/" class="btn btn-lg btn-success" role="button">Send Mail</a>
+      </div>
+    </div>
+{% if mail_sent %}
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Yay!</strong> Mail Sent.
+    </div>
+{% endif %}
+{% endblock %}

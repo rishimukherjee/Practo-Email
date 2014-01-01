@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="content-header">
+    <h1>Patient Details</h1>
+</div>
+{% if total_patients %}
+<div class="padded">
+<table id="patients" class="table table-striped table-nonfluid table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>E-mail ID</th>
+        <th>Date of Birth</th>
+        <th>Mobile number</th>
+    </tr>
+        {% load app_filter %}
+            {% for patient_number in total_patients %}
+                <tr>
+                    <td>{{ patient_names|key:patient_number }}</td>
+                    <td>{{ patient_emails|key:patient_number }}</td>
+                    <td>{{ patient_dobs|key:patient_number }}</td>
+                    <td>{{ patient_mobiles|key:patient_number }}</td>
+                </tr>
+            {% endfor %}
+</table>
+{% else %}
+    <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Sorry!</strong> You have no patient.
+    </div>
+{% endif %}
+</div>
+{% endblock %}

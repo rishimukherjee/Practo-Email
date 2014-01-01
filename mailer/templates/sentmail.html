@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load app_filter %}
+{% block content %}
+<div class="content-header">
+    <h1>Sent Mail</h1>
+</div>
+{% if emails %}
+<div class="row div-nonfluid padded">
+    <div class="col-md-7">
+        <label>Mails</label>
+        <table id="patients" class="table table-hover table-nonfluid table-bordered">
+            <tr>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Patients</th>
+            </tr>
+            {% load app_filter %}
+            {% for email in emails.object_list %}
+            <!--<tr onclick="show_message({{ email.mail_content }}, {{ email.mail_users }});">-->
+            <tr onmouseover="this.style.cursor='pointer'" class='clickableRow'>
+                <input type="hidden" class="content" name="content" value="{{ email.mail_content }}">
+                <input type="hidden" class="patients" name="patients
+                " value="{{ email.mail_users }}">
+                <td>
+                    {{ email.mail_date}}
+                </td>
+                <td>
+                    {{ email.mail_subject }}
+                </td>
+                <td>
+                    {{ email.mail_users|listify }}
+                </td>
+            </tr>
+            {% endfor %}
+            </table>
+            <!-- Next/Prev page links  -->
+            {% if emails.object_list and emails.paginator.num_pages > 1 %}
+            <div class="pagination" style="margin-top: 20px; margin-left: -20px; ">
+                <span class="step-links">
+                    {% if emails.has_previous %}
+                        <a class="btn btn-primary active" role="button" href= "?page={{ emails.previous_page_number }}">newer emails </a>
+                    {% endif %}
+
+                    <span class="current">
+                        &nbsp;Page {{ emails.number }} of {{ emails.paginator.num_pages }}
+                    </span>
+
+                    {% if emails.has_next %}
+                        <a class="btn btn-primary active" role="button" href="?page={{ emails.next_page_number }}"> older emails</a>
+                    {% endif %}
+                </span>
+            </div>
+            {% endif %}
+
+    </div>
+    <div id="message" class="col-md-5">
+    </div>
+</div>
+{% else %}
+    <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Sorry!</strong> You have not sent any email yet.
+    </div>
+
+{% endif %}
+</div>
+{% endblock %}

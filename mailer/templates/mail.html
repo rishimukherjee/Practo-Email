@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load app_filter %}
+{% block content %}
+
+{% if total_patients_having_email %}
+<div class="content-header">
+    <h1>Send Mail</h1>
+</div>
+<div id="error"></div>
+</div>
+<form action="" method="post" role="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row div-nonfluid padded">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label>Subject</label> 
+                <input class="form-control" type="text" name="subject" value="{{ subject }}" placeholder="Enter Subject"/ required>
+            </div>
+            <div class="form-group">
+                <label>Email ID</label>
+                <input class="form-control" id="email" type="text" name="email" value="{{ email }}" placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+                <label>Attachment</label>
+                <input id="attachment" type="file" name="attachment" value="{{ email }}">
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea class="form-control" name="message" rows="5">{{ message }}</textarea required>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="return validate();">Submit</button>
+        </div>
+        <div id="patients" class="col-md-5">
+            <label>To</label>
+            <div class="checkbox" id="selectAll">
+                <label>
+                    <input type="checkbox" onClick="toggle(this)">Select All
+                </label>
+            </div>
+            <table class="table table-striped table-bordered table-nonfluid">
+            {% for patient_number in total_patients_having_email %}
+                <tr>
+                    <td><input type="checkbox" name="patientcheck" class="checkbox" value="{{ patient_emails|key:patient_number }}"></td>
+                    <td>{{ patient_names|key:patient_number }}</td>
+                    <td>{{ patient_emails|key:patient_number }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+</form>
+{% endif %}
+{% endblock %}
